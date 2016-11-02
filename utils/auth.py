@@ -1,13 +1,10 @@
 from flask import render_template, url_for, request, redirect, session
-import hashlib
+import hashlib, sqlite3, csv
 
-
-def scanCSV(file):
-    instream = open(file, 'r')
-    content = instream.read().strip()
-    instream.close()
-    return content
-
+def scanDB():
+    bd = sqlite3.connect('bd.db')
+    c = bd.cursor()
+    return 
 
 def appendCSV(file, string):
     outstream = open(file, 'a')
@@ -23,15 +20,13 @@ def genList(string):
         L2 += [a]
     return L2
 
-
 def userExists(username):
-    userList = genList(scanCSV('data/users.csv'))
-    ans = False
-    for account in userList:
-        if username == account[0]:
-            ans = True
-    return ans
-
+    c = scanDB()
+    s = c.execute('SELECT name FROM users')
+    for name in s:
+        if username == name:
+            return True;
+    return False;
 
 def hashPass(password):
     return hashlib.md5(password).hexdigest()
