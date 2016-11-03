@@ -1,0 +1,9 @@
+Devlog for Team Miniature-Octo-Telegram:
+
+<mm-dd-yyyy> 23:00
+
+name: blah blah blah
+
+<mm-dd-yyyy> 24:00
+
+name: yaaa yaaa yaaa
