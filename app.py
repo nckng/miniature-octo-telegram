@@ -15,10 +15,8 @@ def login():
 @app.route("/home/")
 def home():
     if 'user' in session:
-        print "USER IN SESSION"
         return render_template('home.html', messageHome = session['user'])
     else:
-        print "USER NOT IN SESSION"
         return redirect(url_for('login'))
 
 @app.route("/authenticate/", methods=['POST'])
