@@ -13,7 +13,7 @@ def userExists(username, c):
     return False;
 
 def register(user, password):
-    bd = sqlite3.connect('../data/bd.db')
+    bd = sqlite3.connect('data/bd.db')
     c = bd.cursor()
     if (userExists(user, c)):
         return 'User already exists.'
@@ -27,7 +27,7 @@ def register(user, password):
         return 'Registration successful.'
 
 def login(user, password):
-    bd = sqlite3.connect('../data/bd.db')
+    bd = sqlite3.connect('data/bd.db')
     c = bd.cursor()
     if (userExists(user, c) == False):
         return 'User does not exist.'
