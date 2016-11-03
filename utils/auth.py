@@ -21,7 +21,7 @@ def register(user, password):
         return 'Invalid username/password.'
     else:
         p = hashPass(password)
-        c.execute('INSERT INTO users VALUES (\'' + user + '\', \'' + p + '\');')
+        c.execute('INSERT INTO users VALUES ("%s", "%s")'%(user, p))
         bd.commit()
         bd.close()
         return 'Registration successful.'
@@ -32,7 +32,7 @@ def login(user, password):
     if (userExists(user, c) == False):
         return 'User does not exist.'
     else:
-        s = c.execute('SELECT password FROM users WHERE name = \'' + user + '\';')
+        s = c.execute('SELECT password FROM users WHERE name = "%s"'%(user))
         p = s.fetchone()[0]
         if (p != hashPass(password)):
             return 'Incorrect password.'
