@@ -1,59 +1,40 @@
-from flask import render_template, url_for, request, redirect, session
-import hashlib, sqlite3, csv
+"from flask import render_template, url_for, request, redirect, session"
+import hashlib, sqlite3
 
-def scanDB():
-    bd = sqlite3.connect('bd.db')
-    c = bd.cursor()
-    return 
+def hashPass(password):
+    return hashlib.sha512(password).hexdigest()
 
-def appendCSV(file, string):
-    outstream = open(file, 'a')
-    outstream.write(string)
-    outstream.close()
-
-
-def genList(string):
-    L1 = string.split("\n")
-    L2 = []
-    for a in L1:
-        a = a.split(",")
-        L2 += [a]
-    return L2
-
-def userExists(username):
-    c = scanDB()
+def userExists(username, c):
     s = c.execute('SELECT name FROM users')
-    for name in s:
+    for r in s:
+        name = r[0]
         if username == name:
             return True;
     return False;
 
-def hashPass(password):
-    return hashlib.md5(password).hexdigest()
-
-
-def task(username, password, action):
-    userList = genList(scanCSV('data/users.csv'))
-    if action == 'Login':
-        for account in userList:
-            if (username == account[0] and hashPass(password) == account[1]):
-                session['user'] = username
-                return redirect(url_for('home'))
-            if (username == account[0] and not hashPass(password) == account[1]):
-                m = "Incorrect password."
-                return render_template("login.html", messageLogin=m)
-        m = "Username does not exist."
-        return render_template("login.html", messageLogin=m)
+def register(user, password):
+    bd = sqlite3.connect('../data/bd.db')
+    c = bd.cursor()
+    if (userExists(user, c)):
+        return 'User already exists.'
+    elif len(user) == 0 or len(password) == 0:
+        return 'Invalid username/password.'
     else:
-        exists = False
-        for account in userList:
-            if username == account[0]:
-                exists = True
-        if exists:
-            m = "The username already exists."
-            return render_template("login.html", messageLogin=m)
+        p = hashPass(password)
+        c.execute('INSERT INTO users VALUES (\'' + user + '\', \'' + p + '\');')
+        bd.commit()
+        bd.close()
+        return 'Registration successful.'
+
+def login(user, password):
+    bd = sqlite3.connect('../data/bd.db')
+    c = bd.cursor()
+    if (userExists(user, c) == False):
+        return 'User does not exist.'
+    else:
+        s = c.execute('SELECT password FROM users WHERE name = \'' + user + '\';')
+        p = s.fetchone()[0]
+        if (p != hashPass(password)):
+            return 'Incorrect password.'
         else:
-            newUser = username + "," + hashPass(password) + "\n"
-            appendCSV('data/users.csv', newUser)
-            m = "Account successfully created."
-            return render_template("login.html", messageLogin=m)
+            return 'Login successful.'
