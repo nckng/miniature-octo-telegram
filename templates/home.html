@@ -5,7 +5,17 @@
   </head>
 
   <h1><center> Welcome {{ messageHome }} </center></h1>
-  <body>
+  <body> <center>
+    {% for story in stories %}
+    <h1> {{ story }} </h1>
+    <br>
+    {% for i in stories[story] %}
+    COMMENT: {{ i[0] }}
+    AUTHOR: {{ i[1] }}
+    <br>
+    {% endfor %}
+    <br>
+    {% endfor %} </center>
     <form action = "/logout/">
       <center><input type = "submit" name = "action" value = "Logout"></center>
     </form>

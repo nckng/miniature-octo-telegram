@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect, session
-from utils import auth
+from utils import auth, storyDisp
 
 app = Flask(__name__)
 app.secret_key = "nine"
@@ -15,7 +15,8 @@ def login():
 @app.route("/home/")
 def home():
     if 'user' in session:
-        return render_template('home.html', messageHome = session['user'])
+        s = storyDisp.storyList()
+        return render_template('home.html', messageHome = session['user'], stories = s)
     else:
         return redirect(url_for('login'))
 
