@@ -10,8 +10,9 @@
 
   <body>
     <h1> Welcome {{ messageHome }} </h1>
-    
-    <form action = "/create/">
+    <br>
+    <h4> {{ messageStory }} </h4>
+    <form action = "/create/" method="POST">
       <p> Title: <input type = "text" name = "title"></p>
       <p> First line of story: <input type = "text" name = "text"></p>
       <input type = "submit" name = "action" value = "Create">

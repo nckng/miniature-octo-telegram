@@ -16,10 +16,13 @@ def home():
     s = homeDisp.storyList(session['user'])
     return render_template('home.html', messageHome = session['user'], stories = s)
 
-@app.route("/create/")
+@app.route("/create/", methods = ['POST'])
 def create():
+    u = session['user']
     title = request.form['title']
     text = request.form['text']
+    msg = storyCreate.addStory(title, u, text)
+    return redirect(url_for('home', messageStory = msg)) 
 
 @app.route("/authenticate/", methods = ['POST'])
 def authenticate():
