@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect, session
-from utils import auth, homeDisp
+from utils import auth, homeDisp, storyCreate
 
 app = Flask(__name__)
 app.secret_key = "nine"
@@ -15,6 +15,12 @@ def login():
 def home():
     s = homeDisp.storyList(session['user'])
     return render_template('home.html', messageHome = session['user'], stories = s)
+
+@app.route("/create/")
+def create():
+    title = request.form['title']
+    text = request.form['text']
+    
 
 @app.route("/authenticate/", methods = ['POST'])
 def authenticate():
