@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect, session
-from utils import auth, storyDisp
+from utils import auth, homeDisp
 
 app = Flask(__name__)
 app.secret_key = "nine"
@@ -13,18 +13,20 @@ def login():
 
 @app.route("/home/")
 def home():
-        s = storyDisp.storyList()
-        return render_template('home.html', messageHome = session['user'], stories = s)
+    s = homeDisp.storyList()
+    return render_template('home.html', messageHome = session['user'], stories = s)
 
 @app.route("/authenticate/", methods = ['POST'])
 def authenticate():
-    data = [request.form['username'], request.form['password'], request.form['action']]
-    data = auth.authenticate(data)
-    if data [1]:
-        session ['user'] = True
+    u = request.form['username']
+    p = request.form['password']
+    a = request.form['action']
+    data = auth.authenticate([u, p, a])
+    if data[1]:
+        session['user'] = u
         return redirect(url_for('home'))
     else:
-        return render_template('login.html', messageLogin = data [0])
+        return render_template('login.html', messageLogin = data[0])
 
 @app.route("/logout/")
 def logout():

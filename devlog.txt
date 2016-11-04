@@ -1,5 +1,11 @@
 Devlog for Team Miniature-Octo-Telegram:
 
 
-11/3 9:20 - 10:20
+11/3 9:20 PM - 10:20 PM
 Jonathan: Worked on front end logistics, fiddled with formatting of login and home pages. Moved all authentication out of app.py and into auth.py.
+
+11/3 3:35 PM - 5:00 PM
+Jason: Started working on functions in homeDisp.py to display all comments in every story.
+
+11/4 1:25 AM - 1:30 AM
+Jason: Finished homeDisp.py to display story comments on the home page. Fixed bugs in auth.py.
