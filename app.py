@@ -20,7 +20,6 @@ def home():
 def create():
     title = request.form['title']
     text = request.form['text']
-    
 
 @app.route("/authenticate/", methods = ['POST'])
 def authenticate():
