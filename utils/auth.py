@@ -1,5 +1,10 @@
-"from flask import render_template, url_for, request, redirect, session"
 import hashlib, sqlite3
+
+def authenticate(data):
+    if data[2] == 'Register':
+        return register(data[0], data[1])
+    else:
+        return login(data[0], data[1])
 
 def hashPass(password):
     return hashlib.sha512(password).hexdigest()
@@ -13,28 +18,32 @@ def userExists(username, c):
     return False;
 
 def register(user, password):
+    result = []
     bd = sqlite3.connect('data/bd.db')
     c = bd.cursor()
     if (userExists(user, c)):
-        return 'User already exists.'
+        result = ['User already exists.', False]
     elif len(user) == 0 or len(password) == 0:
-        return 'Invalid username/password.'
+        result = ['Invalid username/password.', False]
     else:
         p = hashPass(password)
         c.execute('INSERT INTO users VALUES ("%s", "%s")'%(user, p))
         bd.commit()
         bd.close()
-        return 'Registration successful.'
+        result = ['Registration successful.', False]
+    return result
 
 def login(user, password):
+    result = []
     bd = sqlite3.connect('data/bd.db')
     c = bd.cursor()
     if (userExists(user, c) == False):
-        return 'User does not exist.'
+        result = ['User does not exist.', False]
     else:
         s = c.execute('SELECT password FROM users WHERE name = "%s"'%(user))
         p = s.fetchone()[0]
         if (p != hashPass(password)):
-            return 'Incorrect password.'
+            result = ['Incorrect password.', False]
         else:
-            return 'Login successful.'
+            result = ['Login successful.', True]
+    return result

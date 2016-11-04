@@ -4,7 +4,6 @@ from utils import auth, storyDisp
 app = Flask(__name__)
 app.secret_key = "nine"
 
-
 @app.route("/")
 @app.route("/login/")
 def login():
@@ -14,27 +13,18 @@ def login():
 
 @app.route("/home/")
 def home():
-    if 'user' in session:
         s = storyDisp.storyList()
         return render_template('home.html', messageHome = session['user'], stories = s)
-    else:
-        return redirect(url_for('login'))
 
-@app.route("/authenticate/", methods=['POST'])
+@app.route("/authenticate/", methods = ['POST'])
 def authenticate():
-    u = request.form['username']
-    p = request.form['password']
-    a = request.form['action']
-    if (a == 'Register'):
-        msg = auth.register(u, p)
-        return render_template('login.html', messageLogin = msg)
+    data = [request.form['username'], request.form['password'], request.form['action']]
+    data = auth.authenticate(data)
+    if data [1]:
+        session ['user'] = True
+        return redirect(url_for('home'))
     else:
-        msg = auth.login(u, p)
-        if (msg == 'Login successful.'):
-            session['user'] = u
-            return redirect(url_for('home'))
-        else:
-            return render_template('login.html', messageLogin = msg)
+        return render_template('login.html', messageLogin = data [0])
 
 @app.route("/logout/")
 def logout():

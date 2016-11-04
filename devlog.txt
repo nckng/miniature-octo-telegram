@@ -1,9 +1,5 @@
 Devlog for Team Miniature-Octo-Telegram:
 
-<mm-dd-yyyy> 23:00
 
-name: blah blah blah
-
-<mm-dd-yyyy> 24:00
-
-name: yaaa yaaa yaa
+11/3 9:20 - 10:20
+Jonathan: Worked on front end logistics, fiddled with formatting of login and home pages. Moved all authentication out of app.py and into auth.py.
