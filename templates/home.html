@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Story Site </title>
+    <title> Home Page </title>
   </head>
 
-  <h1><center> Welcome {{ messageHome }} </center></h1>
-  <body> <center>
+  <style>
+    body {text-align: center}
+  </style>
+
+  <body>
+    <h1> Welcome {{ messageHome }} </h1>
     {% for story in stories %}
-    <h1> {{ story }} </h1>
-    <br>
+    <h2> {{ story }} </h2>
+    <h3> Comments: </h3>
     {% for i in stories[story] %}
-    COMMENT: {{ i[0] }}
-    AUTHOR: {{ i[1] }}
-    <br>
+    <p> {{ i[1]}}: {{ i[0] }} </p>
     {% endfor %}
-    <br>
-    {% endfor %} </center>
+    {% endfor %}
+
     <form action = "/logout/">
-      <center><input type = "submit" name = "action" value = "Logout"></center>
+      <input type = "submit" name = "action" value = "Logout">
     </form>
   </body>
 </html>
