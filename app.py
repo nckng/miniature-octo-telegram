@@ -13,7 +13,7 @@ def login():
 
 @app.route("/home/")
 def home():
-    s = homeDisp.storyList()
+    s = homeDisp.storyList(session['user'])
     return render_template('home.html', messageHome = session['user'], stories = s)
 
 @app.route("/authenticate/", methods = ['POST'])

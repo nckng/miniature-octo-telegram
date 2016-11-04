@@ -9,7 +9,7 @@ def getContent(story, db):
         content.append([r[1], r[0]])
     return content
 
-def storyList():
+def storyList(username):
     stories = OrderedDict()
     bd = sqlite3.connect('data/bd.db')
     c = bd.cursor()
