@@ -10,6 +10,9 @@
 
   <body>
     <h1> Welcome {{ messageHome }} </h1>
+    <form action = "/create/">
+      <input type = "submit" name = "action" value = "Create">
+    </form>
     {% for story in stories %}
     <h2> {{ story }} </h2>
     <h3> Comments: </h3>
