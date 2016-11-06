@@ -26,3 +26,13 @@ def addStory(title, user, content):
         bd.close()
         result = ['', True]
     return result
+
+def addComment(author, title, comment):
+    result = []
+    bd = sqlite3.connect('data/bd.db')
+    c = bd.cursor()
+    c.execute('INSERT INTO "%s" VALUES ("%s", "%s")'%(title, author, comment))
+    bd.commit()
+    bd.close()
+    result = ['', True]
+    return result    

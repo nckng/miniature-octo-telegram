@@ -49,7 +49,7 @@ def create():
     else:
         return render_template('write.html', messageCreate = data[0])
 
-@app.route('/renderStory/', methods = ['POST'])
+@app.route('/renderStory/', methods = ['POST','GET'])
 def renderStory():
     storyTitle = request.form['title']
     storyAuthor = storyDisp.genAuthor(storyTitle)
@@ -59,6 +59,14 @@ def renderStory():
     if not storyDisp.hasContributed(session['user'], storyTitle):
         lastLine = storyDisp.genLast(storyTitle)
         return render_template('comment.html', last = lastLine, title = storyTitle, author = storyAuthor)
+
+@app.route('/addcomment/', methods = ['POST'])
+def comment():
+    getTitle = request.form['title']
+    getText = request.form['comment']
+    getUser = session['user']
+    storyCreate.addComment(getUser,getTitle,getText)
+    return redirect(url_for('renderStory'))
 
 
 @app.route('/logout/')
