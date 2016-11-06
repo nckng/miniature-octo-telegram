@@ -8,16 +8,12 @@ def storyExists(title, c):
             return True;
     return False;
 
-def addStory(title, user, text):
+def addStory(title, user, addition):
     bd = sqlite3.connect('data/bd.db')
     c = bd.cursor()
-    if (storyExists(title, c)):
-        return 'Story already exists.'
-    elif len(title) == 0 or len(text) == 0:
-         return 'Missing title/text.'
-    else:
-        c.execute('CREATE TABLE %s (name TEXT, content TEXT)'%(title))
-        c.execute('INSERT INTO %s VALUES ("%s", "%s")'%(title, user, text))
+    if (not (storyExists(title, c) or len(title) == 0 or len(addition) == 0)):
+        c.execute('CREATE TABLE %s (user TEXT, addition TEXT);' %(title))
+        c.execute('INSERT INTO %s (user, addition) VALUES ("%s", "%s");' %(title, user, addition))
+        c.execute('INSERT INTO stories (name) VALUES ("%s");' %(title))
         bd.commit()
         bd.close()
-        return 'Creation successful.'

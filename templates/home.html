@@ -9,22 +9,17 @@
   </style>
 
   <body>
-    <h1> Welcome {{ messageHome }} </h1>
-    <br>
-    <h4> {{ messageStory }} </h4>
-    <form action = "/create/" method="POST">
-      <p> Title: <input type = "text" name = "title"></p>
-      <p> First line of story: <input type = "text" name = "text"></p>
-      <input type = "submit" name = "action" value = "Create">
+    <h1> Welcome {{ user }} </h1>
+
+    <form action = "/write/">
+      <input type = "submit" name = "action" value = "Write new story">
     </form>
 
     {% for story in stories %}
-    <h2> {{ story }} </h2>
-    <h3> Comments: </h3>
-    {% for i in stories[story] %}
-    <p> {{ i[1]}}: {{ i[0] }} </p>
-    {% endfor %}
-    <br>
+      <h2> {{ story }} </h2>
+      {% for i in stories[story] %}
+        <p> {{ i[1]}}: {{ i[0] }} </p>
+      {% endfor %}
     {% endfor %}
 
     <form action = "/logout/">
