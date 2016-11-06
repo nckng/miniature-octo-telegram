@@ -35,12 +35,13 @@ def authenticate():
     else:
         return render_template('login.html', messageLogin = data[0])
 
-@app.route('/store/', methods = ['POST'])
-def store():
-    storyCreate.addStory (request.form['title'], session['user'], request.form['addition'])
+@app.route('/create/', methods = ['POST'])
+def create():
+    title = request.form['title']
+    text = request.form['addition']
+    u = session['user']
+    storyCreate.addStory (title, u, text)
     return redirect(url_for('home'))
-
-
 
 @app.route('/logout/')
 def logout():

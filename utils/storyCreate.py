@@ -11,9 +11,10 @@ def storyExists(title, c):
 def addStory(title, user, addition):
     bd = sqlite3.connect('data/bd.db')
     c = bd.cursor()
-    if (not (storyExists(title, c) or len(title) == 0 or len(addition) == 0)):
-        c.execute('CREATE TABLE %s (user TEXT, addition TEXT);' %(title))
-        c.execute('INSERT INTO %s (user, addition) VALUES ("%s", "%s");' %(title, user, addition))
-        c.execute('INSERT INTO stories (name) VALUES ("%s");' %(title))
+    if (not storyExists(title, c)):
+        c.execute('CREATE TABLE "%s" (user TEXT, content TEXT)'%(title))
+        c.execute('INSERT INTO "%s" VALUES ("%s", "%s")'%(title, user, addition))
+        c.execute('INSERT INTO stories VALUES ("%s")'%(title))
         bd.commit()
         bd.close()
+        

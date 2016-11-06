@@ -4,7 +4,7 @@ from collections import OrderedDict
 def getContent(story, db):
     content = []
     c = db.cursor()
-    s = c.execute('SELECT * FROM %s'%(story))
+    s = c.execute('SELECT * FROM "%s"'%(story))
     for entry in s:
         content.append([entry[0], entry[1]])
     return content
@@ -12,7 +12,7 @@ def getContent(story, db):
 # returns True if user has contributed/authored specified story; false otherwise
 def hasContributed(username, story, db):
     c = db.cursor()
-    s = c.execute('SELECT * FROM %s'%(story))
+    s = c.execute('SELECT * FROM "%s"'%(story))
     for entry in s:
         if entry[0] == username: return True
     return False
