@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block content %}
-  <h1> Behold, {{ title }} </h1>
+  <h1> Behold, {{ title }} by {{ author }} </h1>
   {% for line in story %}
   <br>{{ line }}: {{ story[line] }}
+  {% endfor %}
 {% endblock %}
