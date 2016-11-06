@@ -15,10 +15,19 @@
       <input type = "submit" name = "action" value = "Write new story">
     </form>
 
-    {% for story in stories %}
+    <h1> Stories you haven't contributed to: </h1>
+    {% for story in nonStories %}
       <h2> {{ story }} </h2>
-      {% for i in stories[story] %}
-        <p> {{ i[1]}}: {{ i[0] }} </p>
+      {% for i in nonStories[story] %}
+        <p> {{ i[0]}}: {{ i[1] }} </p>
+      {% endfor %}
+    {% endfor %}
+
+    <h1> Stories you created/contributed to: </h1>
+    {% for story in myStories %}
+      <h2> {{ story }} </h2>
+      {% for i in myStories[story] %}
+        <p> {{ i[0]}}: {{ i[1] }} </p>
       {% endfor %}
     {% endfor %}
 

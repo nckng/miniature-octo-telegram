@@ -13,7 +13,11 @@ def login():
 
 @app.route('/home/')
 def home():
-    return render_template('home.html', user = session['user'], stories = homeDisp.storyList(session['user']))
+    my = homeDisp.myStoryList(session['user'])
+    non = homeDisp.nonStoryList(session['user'])
+    contribAny = homeDisp.hasContributedAny(session['user'])
+    contribAll = homeDisp.hasContributedAll(session['user'])
+    return render_template('home.html', user = session['user'], myStories = my, nonStories = non)
 
 @app.route('/write/')
 def write():
