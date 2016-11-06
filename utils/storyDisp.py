@@ -30,10 +30,8 @@ def genAuthor(story):
 def genLast(story):
     db = sqlite3.connect('data/bd.db')
     c = db.cursor()
-    s = c.execute('SELECT * FROM "%s"'%(story))
-    len = 0
-    for entry in s:
-        len += 1
-    user = entry[len-1][0]
-    text = entry[len-1][1]
+    s = c.execute('SELECT * FROM "%s" WHERE user = (SELECT MAX(user) FROM "%s")'%(story, story))
+    entry = s.fetchone()
+    user = entry[0]
+    text = entry[1]
     return user + ": " + text

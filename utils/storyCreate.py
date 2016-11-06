@@ -5,8 +5,8 @@ def storyExists(title, c):
     for r in s:
         name = r[0]
         if title == name:
-            return True;
-    return False;
+            return True
+    return False
 
 def addStory(title, user, content):
     result = []

@@ -14,8 +14,8 @@ def userExists(username, c):
     for r in s:
         name = r[0]
         if username == name:
-            return True;
-    return False;
+            return True
+    return False
 
 def register(user, password):
     result = []
@@ -23,8 +23,8 @@ def register(user, password):
     c = bd.cursor()
     if (userExists(user, c)):
         result = ['User already exists.', False]
-    elif len(user) == 0 or len(password) == 0:
-        result = ['Invalid username/password.', False]
+    elif not user.isalnum() or not password.isalnum():
+        result = ['Username and password may only consist of alphanumeric characters.', False]
     else:
         p = hashPass(password)
         c.execute('INSERT INTO users VALUES ("%s", "%s")'%(user, p))
