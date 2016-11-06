@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> Login Page </title>
-  </head>
+{% extends "parent.html" %}
 
-  <style>
-    body {text-align: center}
-  </style>
+{% block title %}
+  Login Page
+{% endblock %}
 
-  <body>
-    <h1> Login or Register </h1>
-    <p> {{ messageLogin }} </p>
-    <form action="/authenticate/" method="POST">
-      <p> Username: <input type = "text" name = "username"></p>
-	    <p> Password: <input type = "password" name = "password"></p>
-	    <input type="submit" name = "action" value = "Login">
-	    <input type="submit" name = "action" value = "Register">
-    </form>
-  </body>
-</html>
+{% block content}
+  <h1> Login or Register </h1>
+  <p> {{ messageLogin }} </p>
+  <form action="/authenticate/" method="POST">
+    <p> Username: <input type = "text" name = "username"></p>
+    <p> Password: <input type = "password" name = "password"></p>
+    <input type="submit" name = "action" value = "Login">
+    <input type="submit" name = "action" value = "Register">
+  </form>
+{% endblock %}

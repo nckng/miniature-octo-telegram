@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> Home Page </title>
-  </head>
+{% extends "parent.html" %}
 
-  <style>
-    body {text-align: center}
-  </style>
+{% block title %}
+  Home Page
+{% endblock %}
 
-  <body>
+{% block content %}
     <h1> Welcome {{ user }} </h1>
 
     <form action = "/write/">
@@ -36,5 +32,4 @@
     <form action = "/logout/">
       <input type = "submit" name = "action" value = "Logout">
     </form>
-  </body>
-</html>
+{% block content %}

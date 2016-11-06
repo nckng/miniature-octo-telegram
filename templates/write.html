@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> Writing Page </title>
-  </head>
+{% extends "parent.html" %}
 
-  <style>
-    body {text-align: center}
-  </style>
+{% block title %}
+  Writing Page
+{% endblock}
 
-  <body>
-    <h1> Behold, your new story: </h1>
-    <p> {{ messageCreate }} </p>
-    <form action = "/create/" method="POST">
-      <p> Title: <input type = "text" name = "title"></p>
-      <p> First line of story: <input type = "text" name = "content"></p>
-      <input type = "submit" name = "action" value = "Create">
-    </form>
-  </body>
-</html>
+{% block content %}
+  <h1> Behold, your new story: </h1>
+  <p> {{ messageCreate }} </p>
+  <form action = "/create/" method="POST">
+    <p> Title: <input type = "text" name = "title"></p>
+    <p> First line of story: <input type = "text" name = "content"></p>
+    <input type = "submit" name = "action" value = "Create">
+  </form>
+{% endblock %}
