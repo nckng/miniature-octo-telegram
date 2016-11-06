@@ -16,6 +16,7 @@
     </form>
 
     <h1> Stories you haven't contributed to: </h1>
+    <h2> {{ nonMsg}} </h2>
     {% for story in nonStories %}
       <h2> {{ story }} </h2>
       {% for i in nonStories[story] %}
@@ -24,6 +25,7 @@
     {% endfor %}
 
     <h1> Stories you created/contributed to: </h1>
+    <h2> {{ myMsg}} <h2>
     {% for story in myStories %}
       <h2> {{ story }} </h2>
       {% for i in myStories[story] %}

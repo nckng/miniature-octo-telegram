@@ -15,9 +15,12 @@ def login():
 def home():
     my = homeDisp.myStoryList(session['user'])
     non = homeDisp.nonStoryList(session['user'])
-    contribAny = homeDisp.hasContributedAny(session['user'])
-    contribAll = homeDisp.hasContributedAll(session['user'])
-    return render_template('home.html', user = session['user'], myStories = my, nonStories = non)
+    myMsg = nonMsg = ""
+    if (len(my) == 0):
+        myMsg = "You haven't contributed to any stories :("
+    if (len(non) == 0):
+        nonMsg = "You've contributed to all the stories :)"
+    return render_template('home.html', user = session['user'], myStories = my, nonStories = non, myMsg = myMsg, nonMsg = nonMsg)
 
 @app.route('/write/')
 def write():
