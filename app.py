@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect, session
-from utils import auth, homeDisp, storyCreate
+from utils import auth, homeDisp, storyCreate, storyDisp
 
 app = Flask(__name__)
 app.secret_key = 'nine'
@@ -48,6 +48,18 @@ def create():
         return redirect(url_for('home'))
     else:
         return render_template('write.html', messageCreate = data[0])
+
+@app.route('/renderStory/', methods = ['POST'])
+def renderStory():
+    storyTitle = request.form['title']
+    storyAuthor = storyDisp.genAuthor(storyTitle)
+    if storyDisp.hasContributed(session['user'], storyTitle):
+        storyDict = storyDisp.genStory(storyTitle);
+        return render_template('view.html', story = storyDict, title = storyTitle, author = storyAuthor)
+    if not storyDisp.hasContributed(session['user'], storyTitle):
+        lastLine = storyDisp.genLast(storyTitle)
+        return render_template('comment.html', last = lastLine, title = storyTitle, author = storyAuthor)
+
 
 @app.route('/logout/')
 def logout():

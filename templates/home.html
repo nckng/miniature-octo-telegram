@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends "parent.html" %}
 
 {% block title %}
@@ -12,21 +13,23 @@
     </form>
 
     <h1> Stories you haven't contributed to: </h1>
-    <h2> {{ nonMsg}} </h2>
+    <h2> {{ nonMsg }} </h2>
     {% for story in nonStories %}
       <h2> {{ story }} </h2>
-      {% for i in nonStories[story] %}
-        <p> {{ i[0]}}: {{ i[1] }} </p>
-      {% endfor %}
+        <form action = "/renderStory/" method = "POST">
+          <input type = "submit" name = "action" value = "append story">
+          <input type = "hidden" name = "title" value = "{{ story }}">
+        </form>
     {% endfor %}
 
     <h1> Stories you created/contributed to: </h1>
-    <h2> {{ myMsg}} <h2>
+    <h2> {{ myMsg }} </h2>
     {% for story in myStories %}
       <h2> {{ story }} </h2>
-      {% for i in myStories[story] %}
-        <p> {{ i[0]}}: {{ i[1] }} </p>
-      {% endfor %}
+        <form action = "/renderStory/" method = "POST">
+          <input type = "submit" name = "action" value = "view story">
+          <input type = "hidden" name = "title" value = "{{ story }}">
+        </form>
     {% endfor %}
 
     <form action = "/logout/">

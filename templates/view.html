@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 {% extends "parent.html" %}
 
 {% block title %}
@@ -5,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1> Behold, {{ title }} by  { author } </h1>
-    <!Same presentation as in home (don't know how to implement without backend)>
+  <h1> Behold, {{ title }} </h1>
+  {% for line in story %}
+  <br>{{ line }}: {{ story[line] }}
 {% endblock %}
