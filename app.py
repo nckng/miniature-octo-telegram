@@ -41,10 +41,13 @@ def authenticate():
 @app.route('/create/', methods = ['POST'])
 def create():
     title = request.form['title']
-    text = request.form['addition']
+    text = request.form['content']
     u = session['user']
-    storyCreate.addStory (title, u, text)
-    return redirect(url_for('home'))
+    data = storyCreate.addStory(title, u ,text)
+    if data[1]:
+        return redirect(url_for('home'))
+    else:
+        return render_template('write.html', messageCreate = data[0])
 
 @app.route('/logout/')
 def logout():
