@@ -54,7 +54,7 @@ def renderStory():
     storyTitle = request.form['title']
     storyAuthor = storyDisp.genAuthor(storyTitle)
     if storyDisp.hasContributed(session['user'], storyTitle):
-        storyDict = storyDisp.genStory(storyTitle);
+        storyDict = storyDisp.genStory(storyTitle)
         return render_template('view.html', story = storyDict, title = storyTitle, author = storyAuthor)
     if not storyDisp.hasContributed(session['user'], storyTitle):
         lastLine = storyDisp.genLast(storyTitle)
@@ -66,7 +66,10 @@ def addComment():
     storyText = request.form['comment']
     user = session['user']
     storyCreate.addComment(user, storyTitle, storyText)
-    return redirect(url_for('renderStory'))
+    storyDict = storyDisp.genStory(storyTitle)
+    storyAuthor = storyDisp.genAuthor(storyTitle)
+    #return render_template('view.html', story = storyDict, title = storyTitle, author = storyAuthor)
+    return redirect(url_for('renderStory'), code = 307)
 
 
 @app.route('/logout/')
