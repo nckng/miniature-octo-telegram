@@ -11,7 +11,7 @@ def login():
         return redirect(url_for('home'))
     return render_template('login.html')
 
-@app.route('/home/', methods = ['POST'])
+@app.route('/home/', methods = ['POST', 'GET'])
 def home():
     my = homeDisp.myStoryList(session['user'])
     non = homeDisp.nonStoryList(session['user'])
