@@ -24,3 +24,5 @@ Reo: Added 'Return to Home' buttons on story rendering pages to avoid back butto
 
 11/6
 Reo: Fixed redirect from html page for viewing full stories
+
+11/6 Jason: Fixed storyCreate.py to allow for multiple word titles and content for new stories. Added error messages for story creation and account registration. Added a redirect return statement for when routes were accessed when not logged in.
