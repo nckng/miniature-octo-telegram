@@ -11,7 +11,7 @@ def login():
         return redirect(url_for('home'))
     return render_template('login.html')
 
-@app.route('/home/')
+@app.route('/home/', methods = ['POST'])
 def home():
     my = homeDisp.myStoryList(session['user'])
     non = homeDisp.nonStoryList(session['user'])
@@ -60,12 +60,12 @@ def renderStory():
         lastLine = storyDisp.genLast(storyTitle)
         return render_template('comment.html', last = lastLine, title = storyTitle, author = storyAuthor)
 
-@app.route('/addcomment/', methods = ['POST'])
-def comment():
-    getTitle = request.form['title']
-    getText = request.form['comment']
-    getUser = session['user']
-    storyCreate.addComment(getUser,getTitle,getText)
+@app.route('/addComment/', methods = ['POST'])
+def addComment():
+    storyTitle = request.form['title']
+    storyText = request.form['comment']
+    user = session['user']
+    storyCreate.addComment(user, storyTitle, storyText)
     return redirect(url_for('renderStory'))
 
 

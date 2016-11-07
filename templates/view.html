@@ -10,4 +10,7 @@
   {% for line in story %}
   <br>{{ line }}: {{ story[line] }}
   {% endfor %}
+<form action = "/home/" method = "POST">
+  <input type = "submit" name = "action" value = "Return to Home">
+</form>
 {% endblock %}
