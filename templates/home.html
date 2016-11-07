@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% extends "parent.html" %}
 
 {% block title %}
@@ -17,7 +16,7 @@
     {% for story in nonStories %}
       <h2> {{ story }} </h2>
         <form action = "/renderStory/" method = "POST">
-          <input type = "submit" name = "action" value = "append story">
+          <input type = "submit" name = "action" value = "Comment">
           <input type = "hidden" name = "title" value = "{{ story }}">
         </form>
     {% endfor %}
@@ -27,11 +26,11 @@
     {% for story in myStories %}
       <h2> {{ story }} </h2>
         <form action = "/renderStory/" method = "POST">
-          <input type = "submit" name = "action" value = "view story">
+          <input type = "submit" name = "action" value = "View">
           <input type = "hidden" name = "title" value = "{{ story }}">
         </form>
     {% endfor %}
-
+	<br><br>
     <form action = "/logout/">
       <input type = "submit" name = "action" value = "Logout">
     </form>
