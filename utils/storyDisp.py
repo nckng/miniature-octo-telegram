@@ -4,7 +4,7 @@ from collections import OrderedDict
 def hasContributed(username, story):
     db = sqlite3.connect('data/bd.db')
     c = db.cursor()
-    s = c.execute('SELECT * FROM "%s"'%(story))
+    s = c.execute("SELECT * FROM '%s'"%(story))
     for entry in s:
         if entry[0] == username: return True
     return False
@@ -13,7 +13,7 @@ def genStory(title):
     story = OrderedDict()
     db = sqlite3.connect('data/bd.db')
     c = db.cursor()
-    s = c.execute('SELECT * FROM "%s"'%(title))
+    s = c.execute("SELECT * FROM '%s'"%(title))
     for entry in s:
         user = entry[0]
         text = entry[1]
@@ -23,15 +23,16 @@ def genStory(title):
 def genAuthor(story):
     db = sqlite3.connect('data/bd.db')
     c = db.cursor()
-    s = c.execute('SELECT * FROM "%s"'%(story))
+    s = c.execute("SELECT * FROM '%s'"%(story))
     author = s.fetchone()[0]
     return author
 
 def genLast(story):
     db = sqlite3.connect('data/bd.db')
     c = db.cursor()
-    s = c.execute('SELECT * FROM "%s" WHERE user = (SELECT MAX(user) FROM "%s")'%(story, story))
-    entry = s.fetchone()
+    s = c.execute("SELECT * FROM '%s'"%(story))
+    for r in s:
+        entry = r
     user = entry[0]
     text = entry[1]
     return user + ": " + text

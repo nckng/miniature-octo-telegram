@@ -1,10 +1,18 @@
 import sqlite3
 from collections import OrderedDict
 
+def storyCount():
+    db = sqlite3.connect('data/bd.db')
+    c = db.cursor()
+    s = c.execute("SELECT * FROM stories")
+    if (s.fetchone() == None):
+        return True
+    return False
+
 def getContent(story, db):
     content = []
     c = db.cursor()
-    s = c.execute('SELECT * FROM "%s"'%(story))
+    s = c.execute("SELECT * FROM '%s'"%(story))
     for entry in s:
         content.append([entry[0], entry[1]])
     return content
@@ -12,7 +20,7 @@ def getContent(story, db):
 # returns True if user has contributed/authored specified story; false otherwise
 def hasContributed(username, story, db):
     c = db.cursor()
-    s = c.execute('SELECT * FROM "%s"'%(story))
+    s = c.execute("SELECT * FROM '%s'"%(story))
     for entry in s:
         if entry[0] == username: return True
     return False
@@ -21,7 +29,7 @@ def hasContributed(username, story, db):
 def hasContributedAny(username):
     db = sqlite3.connect('data/bd.db')
     c = db.cursor()
-    s = c.execute('SELECT * FROM stories')
+    s = c.execute("SELECT * FROM stories")
     for record in s:
         story = record[0]
         if hasContributed(username, story, db) == True:
@@ -33,7 +41,7 @@ def hasContributedAny(username):
 def hasContributedAll(username):
     db = sqlite3.connect('data/bd.db')
     c = db.cursor()
-    s = c.execute('SELECT * FROM stories')
+    s = c.execute("SELECT * FROM stories")
     for record in s:
         story = record[0]
         if hasContributed(username, story, db) == False:
@@ -47,7 +55,7 @@ def myStoryList(username):
     stories = OrderedDict()
     db = sqlite3.connect('data/bd.db')
     c = db.cursor()
-    s = c.execute('SELECT * FROM stories')
+    s = c.execute("SELECT * FROM stories")
     for record in s:
         story = record[0]
         if hasContributed(username, story, db) == True:
@@ -61,7 +69,7 @@ def nonStoryList(username):
     stories = OrderedDict()
     db = sqlite3.connect('data/bd.db')
     c = db.cursor()
-    s = c.execute('SELECT * FROM stories')
+    s = c.execute("SELECT * FROM stories")
     for record in s:
         story = record[0]
         if hasContributed(username, story, db) == False:
@@ -69,3 +77,5 @@ def nonStoryList(username):
             stories[story] = content
         else: pass
     return stories
+
+print storyCount()

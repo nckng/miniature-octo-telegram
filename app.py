@@ -16,11 +16,14 @@ def home():
     if 'user' in session:
         my = homeDisp.myStoryList(session['user'])
         non = homeDisp.nonStoryList(session['user'])
+        count = homeDisp.storyCount()
         myMsg = nonMsg = ""
         if (len(my) == 0):
-            myMsg = "You haven't contributed to any stories :("
-        if (len(non) == 0):
-            nonMsg = "You've contributed to all the stories :)"
+            myMsg = "You haven't contributed to any stories. :("
+        if (len(non) == 0 and count):
+            nonMsg = "Nobody has created a story yet. You should write the first! :)"
+        elif (len(non) == 0):
+            nonMsg = "You've contributed to all the stories. :)"
         return render_template('home.html', user = session['user'], myStories = my, nonStories = non, myMsg = myMsg, nonMsg = nonMsg)
     else:
         return redirect(url_for('login'))

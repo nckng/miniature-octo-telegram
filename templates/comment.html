@@ -6,13 +6,14 @@
 
 {% block content %}
   <h1> Behold, {{ title }} by  {{ author }} </h1>
-  {{ last }} <br>
+  {{ last }} <br><br>
   <form action="/addComment/" method = "POST">
-    Add your line to the story:<input type = "text" name="comment">
-    <input type = "submit" name = "action" value="add">
+    Add to the story:<br><input type = "text" name="comment">
+    <br><input type = "submit" name = "action" value="Add">
     <input type = "hidden" name = "title" value = "{{title}}">
   </form>
+  <br><br>
   <form action = "/home/">
-    <input type = "submit" name = "action" value = "Return to Home">
+    <input type = "submit" value = "Return to Home">
   </form>
 {% endblock %}

@@ -1,7 +1,7 @@
 import sqlite3
 
 def storyExists(title, c):
-    s = c.execute('SELECT name FROM stories')
+    s = c.execute("SELECT name FROM stories")
     for r in s:
         name = r[0]
         if title == name:
@@ -19,9 +19,9 @@ def addStory(title, user, content):
     elif len(content) == 0:
         result = ['Your story needs content.', False]
     else:
-        c.execute('CREATE TABLE "%s" (user TEXT, content TEXT)'%(title))
-        c.execute('INSERT INTO "%s" VALUES ("%s", "%s")'%(title, user, content))
-        c.execute('INSERT INTO stories VALUES ("%s")'%(title))
+        c.execute("CREATE TABLE '%s' (user TEXT, content TEXT)"%(title))
+        c.execute("INSERT INTO '%s' VALUES ('%s', '%s')"%(title, user, content))
+        c.execute("INSERT INTO stories VALUES ('%s')"%(title))
         bd.commit()
         bd.close()
         result = ['', True]
@@ -31,7 +31,7 @@ def addComment(author, title, comment):
     result = []
     bd = sqlite3.connect('data/bd.db')
     c = bd.cursor()
-    c.execute('INSERT INTO "%s" VALUES ("%s", "%s")'%(title, author, comment))
+    c.execute("INSERT INTO '%s' VALUES ('%s', '%s')"%(title, author, comment))
     bd.commit()
     bd.close()
     result = ['', True]
