@@ -72,8 +72,6 @@ def addComment():
     storyText = request.form['comment']
     user = session['user']
     storyCreate.addComment(user, storyTitle, storyText)
-    storyDict = storyDisp.genStory(storyTitle)
-    storyAuthor = storyDisp.genAuthor(storyTitle)
     return redirect(url_for('renderStory'), code = 307)
 
 @app.route('/logout/')

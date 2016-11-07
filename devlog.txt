@@ -1,14 +1,26 @@
 Devlog for Team Miniature-Octo-Telegram:
 
 
-11/3 9:20 PM - 10:20 PM
+11/3
 Jonathan: Worked on front end logistics, fiddled with formatting of login and home pages. Moved all authentication out of app.py and into auth.py.
 
-11/3 3:35 PM - 5:00 PM
+11/3
 Jason: Started working on functions in homeDisp.py to display all comments in every story.
 
-11/4 1:25 AM - 1:30 AM
+11/4
 Jason: Finished homeDisp.py to display story comments on the home page. Fixed bugs in auth.py.
 
-11/4 12:16
+11/4
 Jonathan: Created creation site and routed it to app.py. Also added a button to home.html linking to create.html
+
+11/6
+Reo: Separated home.html's display into two sections: one for stories that haven't been contributed to and one for those that have
+
+11/6
+Reo: Created renderStory() in app.py; back-end for determining how and where to render stories
+
+11/6
+Reo: Added 'Return to Home' buttons on story rendering pages to avoid back button issues
+
+11/6
+Reo: Fixed redirect from html page for viewing full stories
